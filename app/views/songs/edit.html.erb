@@ -1,0 +1,61 @@
+<h2>Editing "<%= @song.title %>"</h2>
+  <%= form_tag song_path(@song), method: "patch" do %>
+
+    <% if @song.errors.any? %>
+      <div id="error_explanation">
+        <h2>There were some errors:</h2>
+        <ul>
+          <% @song.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <% if @song.errors[:title].empty? %>
+      <div class="song_title">
+    <% else %>
+      <div class="field_with_errors">
+    <% end %>
+      <%= label_tag "title", "Title" %>
+      <%= text_field_tag "song_title", @song.title %>
+    </div>
+
+    <% if @song.errors[:released].empty? %>
+      <div class="field">
+    <% else %>
+      <div class="field_with_errors">
+    <% end %>      
+      <%= label_tag "released", "Released" %>
+      <p>Must be either "True" or "False".</p>
+      <%= text_field_tag "song_released", @song.released %>
+    </div>
+
+    <% if @song.errors[:release_year].empty? %>
+      <div class="song_release_year">
+    <% else %>
+      <div class="song_release_year_with_errors">
+    <% end %>
+      <%= label_tag "release_year", "Release Year" %>
+      <br />
+      <%= text_area_tag "song_release_year", @song.release_year %>
+    </div>
+
+    <% if @song.errors[:artist_name].empty? %>
+      <div class="field">
+    <% else %>
+      <div class="field_with_errors">
+    <% end %>
+      <%= label_tag "artist_name", "Artist Name" %>
+      <br />
+      <%= text_area_tag "song_artist_name", @song.artist_name %>
+    </div>
+
+    <div class="field">
+    <%= label_tag "genre", "Genre" %>
+    <br />
+    <%= text_area_tag "song_genre", @song.genre %>
+  </div>
+
+    <%= submit_tag "Update" %>
+  <% end %>

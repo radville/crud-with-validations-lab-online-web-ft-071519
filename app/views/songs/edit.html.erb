@@ -1,5 +1,5 @@
 <h2>Editing "<%= @song.title %>"</h2>
-  <%= form_tag song_path(@song), method: "patch" do %>
+  <%= form_for @song do |f| %>
 
     <% if @song.errors.any? %>
       <div id="error_explanation">
@@ -17,18 +17,17 @@
     <% else %>
       <div class="field_with_errors">
     <% end %>
-      <%= label_tag "title", "Title" %>
-      <%= text_field_tag "song_title", @song.title %>
+      <label>Title</label>     
+      <%= f.text_field :title %>
     </div>
 
     <% if @song.errors[:released].empty? %>
       <div class="field">
     <% else %>
       <div class="field_with_errors">
-    <% end %>      
-      <%= label_tag "released", "Released" %>
-      <p>Must be either "True" or "False".</p>
-      <%= text_field_tag "song_released", @song.released %>
+    <% end %>
+      <label>Released?</label>      
+      <%= f.check_box :released %>
     </div>
 
     <% if @song.errors[:release_year].empty? %>
@@ -36,9 +35,8 @@
     <% else %>
       <div class="song_release_year_with_errors">
     <% end %>
-      <%= label_tag "release_year", "Release Year" %>
-      <br />
-      <%= text_area_tag "song_release_year", @song.release_year %>
+      <label>Release Year</label>     
+      <%= f.text_field :release_year %>
     </div>
 
     <% if @song.errors[:artist_name].empty? %>
@@ -46,16 +44,14 @@
     <% else %>
       <div class="field_with_errors">
     <% end %>
-      <%= label_tag "artist_name", "Artist Name" %>
-      <br />
-      <%= text_area_tag "song_artist_name", @song.artist_name %>
+      <label>Artist Name</label>     
+      <%= f.text_field :artist_name %>
     </div>
 
     <div class="field">
-    <%= label_tag "genre", "Genre" %>
-    <br />
-    <%= text_area_tag "song_genre", @song.genre %>
+    <label>Genre</label>    
+    <%= f.text_field :genre %>
   </div>
 
-    <%= submit_tag "Update" %>
+    <%= f.submit %>
   <% end %>
